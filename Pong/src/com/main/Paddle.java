@@ -1,5 +1,5 @@
 package com.main;
 
-public class paddle {
+public class Paddle {
 
 }

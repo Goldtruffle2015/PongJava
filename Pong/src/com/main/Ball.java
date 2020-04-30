@@ -1,5 +1,5 @@
 package com.main;
 
-public class game {
+public class Ball {
 	
 }
