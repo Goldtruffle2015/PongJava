@@ -28,6 +28,9 @@ public class Game extends Canvas implements Runnable {
 		initialize();
 		
 		new Window("Simple Pong Game", this);
+		
+		this.addKeyListener(new KeyInput(paddle1, paddle2));
+		this.setFocusable(true);
 	}
 
 	private void initialize() {

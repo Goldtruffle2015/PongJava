@@ -23,8 +23,8 @@ public class Paddle {
 			x = 0;
 		} else {
 			x = Game.WIDTH - width;
-		y = Game.HEIGHT / 2 - height / 2;
 		}
+		y = Game.HEIGHT / 2 - height / 2;
 	}
 	
 	public void addPoint() {
@@ -68,8 +68,16 @@ public class Paddle {
 			}
 		} else {
 			if (ballX + Ball.SIZE >= Game.WIDTH - width && ballY + Ball.SIZE >= y && ballY <= y + height) {
-				b.changeYDir();
+				b.changeXDir();
 			}
 		}
+	}
+
+	public void switchDirection(int direction) {
+		vel = speed * direction;
+	}
+	
+	public void stop() {
+		vel = 0;
 	}
 }
