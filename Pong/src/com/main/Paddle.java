@@ -1,6 +1,7 @@
 package com.main;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 public class Paddle {
@@ -36,5 +37,39 @@ public class Paddle {
 		g.fillRect(x, y, width, height);
 		
 		// Draw score
+		int sx;
+		String scoreText = Integer.toString(score);
+		Font font = new Font("Roboto", Font.PLAIN, 50);
+		
+		int strWidth = g.getFontMetrics(font).stringWidth(scoreText) + 1;
+		int padding = 25;
+		
+		if (left) {
+			sx = Game.WIDTH / 2 - padding - strWidth;
+		} else {
+			sx = Game.WIDTH / 2 + padding;
+		}
+		
+		g.setFont(font);
+		g.drawString(scoreText, sx, 50);
+	}
+
+	public void update(Ball b) {
+		// Update position
+		y = Game.ensureRange(y += vel, 0, Game.HEIGHT - height);
+		
+		int ballX = b.getX();
+		int ballY = b.getY();
+		
+		// Collisions
+		if (left) {
+			if (ballX <= width && ballY + b.SIZE >= y && ballY <= y + height) {
+				b.changeXDir();
+			}
+		} else {
+			if (ballX + Ball.SIZE >= Game.WIDTH - width && ballY + Ball.SIZE >= y && ballY <= y + height) {
+				b.changeYDir();
+			}
+		}
 	}
 }

@@ -117,8 +117,11 @@ public class Game extends Canvas implements Runnable {
 
 	private void update() {
 		// Update ball
+		ball.update(paddle1, paddle2);
 		
 		// Update paddles
+		paddle1.update(ball);
+		paddle2.update(ball);
 	}
 
 	public void start() {
@@ -147,5 +150,9 @@ public class Game extends Canvas implements Runnable {
 	// -- Main Method -- //
 	public static void main(String[] args) {
 		new Game();
+	}
+
+	public static int ensureRange(int val, int min, int max) {
+		return Math.min(Math.max(val, min), max);
 	}
 }

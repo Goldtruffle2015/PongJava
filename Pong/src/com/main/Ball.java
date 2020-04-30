@@ -25,16 +25,46 @@ public class Ball {
 		yVel = Game.sign(Math.random() * 2.0 - 1);
 	}
 	
-	public void changeYDlr() {
+	public void changeYDir() {
 		yVel *= -1;
 	}
 	
-	public void changeXDlr() {
+	public void changeXDir() {
 		xVel *= -1;
 	}
 
 	public void draw(Graphics g) {
 		g.setColor(Color.white);
 		g.fillRect(x, y, SIZE, SIZE);
+	}
+
+	public void update(Paddle p1, Paddle p2) {
+		// Update Movement
+		x += xVel * speed;
+		y += yVel * speed;
+		
+		// Collisions
+		if (y + SIZE >= Game.HEIGHT || y <= 0) {
+			changeYDir();
+		}
+		
+		// With Walls
+		if (x + SIZE >= Game.WIDTH) {
+			p1.addPoint();
+			reset();
+		}
+		
+		if (x <= 0) {
+			p2.addPoint();
+			reset();
+		}
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
 	}
 }
